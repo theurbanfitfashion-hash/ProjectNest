@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1020">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b1020">
 <title>ProjectNest — Your tools, one place</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--card:#151f33;--line:#293752;--fg:#edf2ff;--muted:#9baac5;--accent:#9eafff}
+:root{color-scheme:dark;--bg:#0b1020;--line:#293752;--fg:#edf2ff;--muted:#9baac5;--accent:#9eafff}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#1d2c4e 0,transparent 42%),var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-main{max-width:1080px;margin:auto;padding:48px 22px 60px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8298ff,#9d74e9);display:grid;place-items:center;font-size:22px;font-weight:800;color:white}
+main{max-width:1080px;margin:auto;padding:42px 22px 55px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8298ff,#9d74e9);display:grid;place-items:center;font-size:22px;font-weight:800;color:white}
 h1{font-size:clamp(30px,5vw,43px);margin:25px 0 7px;letter-spacing:-1px}.intro{color:var(--muted);margin:0;max-width:600px}
 .section{display:flex;justify-content:space-between;align-items:center;margin:38px 0 16px}.section h2{font-size:17px;margin:0}.count{font-size:12px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:17px}
-.app{background:linear-gradient(145deg,#192640,#121b2d);border:1px solid var(--line);border-radius:19px;padding:21px;display:flex;flex-direction:column;min-height:235px;transition:transform .18s,border-color .18s}
-.app:hover{transform:translateY(-3px);border-color:#6278b1}.apphead{display:flex;align-items:center;gap:13px}.appicon{width:49px;height:49px;border-radius:14px;background:#29395d;display:grid;place-items:center;font-size:24px}
-.app h3{font-size:18px;margin:0}.kind{font-size:12px;color:var(--muted)}.desc{color:#b2bfd7;font-size:13px;margin:19px 0 22px}
+.app{background:linear-gradient(145deg,#192640,#121b2d);border:1px solid var(--line);border-radius:19px;padding:21px;display:flex;flex-direction:column;min-height:220px;transition:transform .18s,border-color .18s}
+.app:hover{transform:translateY(-3px);border-color:#6278b1}.apphead{display:flex;align-items:center;gap:13px}.appicon{width:49px;height:49px;border-radius:14px;background:#29395d;display:grid;place-items:center;font-size:24px;flex-shrink:0}
+.app h3{font-size:18px;margin:0;overflow-wrap:anywhere}.kind{font-size:12px;color:var(--muted)}.desc{color:#b2bfd7;font-size:13px;margin:19px 0 22px}
 .actions{margin-top:auto}.open{display:inline-flex;align-items:center;gap:8px;background:#879bff;color:#10172b;text-decoration:none;font-weight:700;padding:10px 15px;border-radius:10px}.open:hover{background:#a9b7ff}
-.note{margin-top:27px;color:#71819f;font-size:12px}
-@media(max-width:560px){main{padding:30px 16px 45px}.app{min-height:210px}}
-</style>
-</head>
+.add-area{display:flex;justify-content:center;margin:34px 0 0}.add-btn{border:1px dashed #6579ad;background:#17233a;color:#dce5ff;border-radius:13px;padding:13px 22px;font:600 14px system-ui;cursor:pointer}.add-btn:hover{background:#233454}
+.form-panel{display:none;margin:18px auto 0;max-width:560px;padding:20px;background:#141f33;border:1px solid var(--line);border-radius:16px}.form-panel.show{display:block}.form-panel h2{margin:0 0 15px;font-size:18px}
+label{display:block;font-size:12px;color:#b9c5dc;margin:12px 0 5px}input,textarea{width:100%;padding:11px 12px;border-radius:9px;border:1px solid #354664;background:#0d1728;color:var(--fg);font:14px system-ui;outline:none}textarea{resize:vertical;min-height:68px}
+.form-actions{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}.save,.cancel{border:0;border-radius:9px;padding:10px 16px;font-weight:700;cursor:pointer}.save{background:#879bff;color:#10172b}.cancel{background:#293752;color:#e5ebfb}
+.error{color:#ffaaaa;font-size:12px;min-height:18px;margin-top:7px}.note{margin-top:27px;color:#71819f;font-size:12px;text-align:center}
+@media(max-width:560px){main{padding:29px 16px 42px}.app{min-height:205px}.form-actions button{flex:1}}
+</style></head>
 <body><main>
-<header><div class="brand"><div class="logo">P</div><strong>ProjectNest</strong></div>
-<h1>Your tools. One place.</h1><p class="intro">A simple home for your finished web apps. Pick a tool and open it directly — no repository links, no clutter.</p></header>
-<div class="section"><h2>Available apps</h2><span class="count">1 app</span></div>
-<section class="grid" aria-label="Available apps">
-<article class="app"><div class="apphead"><div class="appicon" aria-hidden="true">📚</div><div><h3>StudyTrack</h3><span class="kind">Study &amp; playlist manager</span></div></div>
-<p class="desc">Organize your study playlists and classes, manage playback, and sort lessons in the order that works for each playlist.</p>
-<div class="actions"><a class="open" href="https://studytrack-ke0t.onrender.com" target="_blank" rel="noopener noreferrer">Open App <span aria-hidden="true">↗</span></a></div></article>
-</section>
-<p class="note">Only completed, accessible apps are listed here. More tools will appear as they are ready.</p>
-</main></body></html>
+<header><div class="brand"><div class="logo">P</div><strong>ProjectNest</strong></div><h1>Your tools. One place.</h1><p class="intro">A simple home for your finished web apps. Pick a tool and open it directly — no repository links, no clutter.</p></header>
+<div class="section"><h2>Available apps</h2><span class="count" id="count">1 app</span></div>
+<section class="grid" id="apps" aria-label="Available apps"></section>
+<div class="add-area"><button class="add-btn" id="toggleForm" type="button">＋ Add a new app</button></div>
+<form class="form-panel" id="appForm">
+<h2>Add an app to your hub</h2>
+<label for="appName">App name *</label><input id="appName" maxlength="50" placeholder="e.g. My Calculator" required>
+<label for="appUrl">App website URL *</label><input id="appUrl" type="url" placeholder="https://your-app.example.com" required>
+<label for="appDesc">Short description (optional)</label><textarea id="appDesc" maxlength="160" placeholder="What does this app do?"></textarea>
+<label for="appIcon">Icon / emoji (optional)</label><input id="appIcon" maxlength="4" placeholder="🌐">
+<div class="error" id="error" role="alert"></div>
+<div class="form-actions"><button class="save" type="submit">Add app</button><button class="cancel" id="cancel" type="button">Cancel</button></div>
+</form>
+<p class="note">Your added apps are saved in this browser. They won't automatically appear on other devices or for other visitors.</p>
+</main>
+<script>
+const defaults=[{name:"StudyTrack",url:"https://studytrack-ke0t.onrender.com",desc:"Organize study playlists and classes, manage playback, and sort lessons independently for each playlist.",icon:"📚"}];
+const storageKey="projectnest-user-apps-v1";
+const appGrid=document.getElementById("apps"),form=document.getElementById("appForm"),toggle=document.getElementById("toggleForm"),error=document.getElementById("error");
+function loadApps(){try{const saved=JSON.parse(localStorage.getItem(storageKey)||"[]");return Array.isArray(saved)?saved.filter(a=>a&&typeof a.name==="string"&&typeof a.url==="string"):[]}catch{return []}}
+function render(){const apps=[...defaults,...loadApps()];document.getElementById("count").textContent=apps.length+" app"+(apps.length===1?"":"s");
+appGrid.innerHTML=apps.map(a=>'<article class="app"><div class="apphead"><div class="appicon" aria-hidden="true">'+escapeHtml(a.icon||"🌐")+'</div><div><h3>'+escapeHtml(a.name)+'</h3><span class="kind">Web app</span></div></div><p class="desc">'+escapeHtml(a.desc||"Open this app from your ProjectNest dashboard.")+'</p><div class="actions"><a class="open" href="'+escapeAttr(a.url)+'" target="_blank" rel="noopener noreferrer">Open App <span aria-hidden="true">↗</span></a></div></article>').join("")}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(s){return escapeHtml(s)}
+toggle.addEventListener("click",()=>{form.classList.toggle("show");if(form.classList.contains("show"))document.getElementById("appName").focus()});
+document.getElementById("cancel").addEventListener("click",()=>{form.classList.remove("show");form.reset();error.textContent=""});
+form.addEventListener("submit",e=>{e.preventDefault();error.textContent="";
+const name=document.getElementById("appName").value.trim(),rawUrl=document.getElementById("appUrl").value.trim(),desc=document.getElementById("appDesc").value.trim(),icon=document.getElementById("appIcon").value.trim()||"🌐";
+let url;try{url=new URL(rawUrl)}catch{error.textContent="Please enter a valid website URL.";return}
+if(!["https:","http:"].includes(url.protocol)){error.textContent="Only http:// or https:// website links are allowed.";return}
+const apps=loadApps();if([...defaults,...apps].some(a=>a.url.replace(/\/$/,"")===url.href.replace(/\/$/,""))){error.textContent="This app URL is already in your dashboard.";return}
+apps.push({name,url:url.href,desc,icon});try{localStorage.setItem(storageKey,JSON.stringify(apps))}catch{error.textContent="Could not save in this browser. Check available site storage.";return}
+form.reset();form.classList.remove("show");render()});
+render();
+</script></body></html>
