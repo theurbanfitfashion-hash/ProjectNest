@@ -2,67 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101522">
-<title>ProjectNest — Every project. One home.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>ProjectNest — Your tools, one place</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--panel:#141c2e;--panel2:#1a2540;--text:#eef2ff;--muted:#9aa8c4;--line:#293550;--accent:#8b9cff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#1c2a4b 0,transparent 35%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-main{max-width:1120px;margin:auto;padding:42px 22px 64px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:30px}
-.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:11px}
-h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:8px 0}.sub{color:var(--muted);margin:0;max-width:620px}
-.count{border:1px solid var(--line);background:#111a2b;border-radius:14px;padding:12px 16px;text-align:center;min-width:100px}.count strong{display:block;font-size:25px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 18px}
-input,select{background:#111a2b;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font:inherit;outline:none}
-input{flex:1;min-width:200px}select{min-width:145px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:15px}
-.card{background:linear-gradient(145deg,var(--panel),#101829);border:1px solid var(--line);border-radius:17px;padding:18px;display:flex;flex-direction:column;min-height:190px;transition:.18s}
-.card:hover{transform:translateY(-3px);border-color:#52669a}.cardtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-h2{font-size:18px;margin:0 0 7px}.desc{color:var(--muted);font-size:13px;margin:0 0 18px}
-.tag{white-space:nowrap;font-size:11px;padding:4px 9px;border-radius:99px;background:#26314a;color:#c8d3f4}
-.tag.live{background:#173d35;color:#8de0c0}.tag.progress{background:#44371e;color:#f1ce86}
-.links{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-a{color:#dce4ff;text-decoration:none;border:1px solid #39496b;border-radius:9px;padding:7px 10px;font-size:12px}
-a:hover{background:#273655}.empty{color:var(--muted);padding:30px;text-align:center;display:none}
-footer{margin-top:28px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
-@media(max-width:600px){main{padding:28px 15px 45px}.top{align-items:flex-start}.count{min-width:75px;padding:9px}.toolbar>*{width:100%}}
+:root{color-scheme:dark;--bg:#0b1020;--card:#151f33;--line:#293752;--fg:#edf2ff;--muted:#9baac5;--accent:#9eafff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#1d2c4e 0,transparent 42%),var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1080px;margin:auto;padding:48px 22px 60px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8298ff,#9d74e9);display:grid;place-items:center;font-size:22px;font-weight:800;color:white}
+h1{font-size:clamp(30px,5vw,43px);margin:25px 0 7px;letter-spacing:-1px}.intro{color:var(--muted);margin:0;max-width:600px}
+.section{display:flex;justify-content:space-between;align-items:center;margin:38px 0 16px}.section h2{font-size:17px;margin:0}.count{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:17px}
+.app{background:linear-gradient(145deg,#192640,#121b2d);border:1px solid var(--line);border-radius:19px;padding:21px;display:flex;flex-direction:column;min-height:235px;transition:transform .18s,border-color .18s}
+.app:hover{transform:translateY(-3px);border-color:#6278b1}.apphead{display:flex;align-items:center;gap:13px}.appicon{width:49px;height:49px;border-radius:14px;background:#29395d;display:grid;place-items:center;font-size:24px}
+.app h3{font-size:18px;margin:0}.kind{font-size:12px;color:var(--muted)}.desc{color:#b2bfd7;font-size:13px;margin:19px 0 22px}
+.actions{margin-top:auto}.open{display:inline-flex;align-items:center;gap:8px;background:#879bff;color:#10172b;text-decoration:none;font-weight:700;padding:10px 15px;border-radius:10px}.open:hover{background:#a9b7ff}
+.note{margin-top:27px;color:#71819f;font-size:12px}
+@media(max-width:560px){main{padding:30px 16px 45px}.app{min-height:210px}}
 </style>
 </head>
-<body>
-<main>
-<header class="top">
-<div><div class="eyebrow">Every project. One home.</div><h1>ProjectNest</h1><p class="sub">Your personal workspace to find, open and keep track of every project.</p></div>
-<div class="count"><strong id="total">0</strong><span>projects</span></div>
-</header>
-<section class="toolbar" aria-label="Project filters">
-<input id="search" type="search" placeholder="Search projects…" aria-label="Search projects">
-<select id="status" aria-label="Filter by status"><option value="all">All statuses</option><option>Live</option><option>In progress</option><option>Planned</option><option>Idea</option></select>
+<body><main>
+<header><div class="brand"><div class="logo">P</div><strong>ProjectNest</strong></div>
+<h1>Your tools. One place.</h1><p class="intro">A simple home for your finished web apps. Pick a tool and open it directly — no repository links, no clutter.</p></header>
+<div class="section"><h2>Available apps</h2><span class="count">1 app</span></div>
+<section class="grid" aria-label="Available apps">
+<article class="app"><div class="apphead"><div class="appicon" aria-hidden="true">📚</div><div><h3>StudyTrack</h3><span class="kind">Study &amp; playlist manager</span></div></div>
+<p class="desc">Organize your study playlists and classes, manage playback, and sort lessons in the order that works for each playlist.</p>
+<div class="actions"><a class="open" href="https://studytrack-ke0t.onrender.com" target="_blank" rel="noopener noreferrer">Open App <span aria-hidden="true">↗</span></a></div></article>
 </section>
-<section class="grid" id="projects"></section>
-<div class="empty" id="empty">No projects match your search.</div>
-<footer>Static project directory · Edit the <code>projects</code> list in this HTML file to add or update projects and links.</footer>
-</main>
-<script>
-const projects = [
-{name:"StudyTrack",status:"In progress",desc:"Study playlist and class manager with playlist-specific sorting and playback.",links:[["GitHub","https://github.com/theurbanfitfashion-hash/StudyTrack"]]},
-{name:"Telegram Vault",status:"In progress",desc:"Personal cloud-style media and file access through Telegram.",links:[["GitHub","https://github.com/theurbanfitfashion-hash/telegram-vault"]]},
-{name:"DownloadFromUrl",status:"In progress",desc:"URL-based media extractor and downloader for supported video, audio and image sources.",links:[["GitHub","https://github.com/theurbanfitfashion-hash/DownloadFromUrl"]]},
-{name:"Instagram Reels Downloader",status:"Planned",desc:"A dedicated responsive downloader for Instagram reels and posts.",links:[["GitHub","https://github.com/theurbanfitfashion-hash/Instagram-Reels-Downloader-"]]},
-{name:"Clipboard Sharing Platform",status:"Planned",desc:"Create rooms and share text, code and commands instantly between devices.",links:[["GitHub","https://github.com/theurbanfitfashion-hash/ClipRoom"]]},
-{name:"Hindi Number Pronunciation",status:"Live",desc:"A simple random-number practice page for speaking numbers from 1 to 100.",links:[]},
-{name:"AI Editing Prompt Organizer",status:"Idea",desc:"Save, categorize and search AI editing prompts collected from Instagram posts and reels.",links:[]},
-{name:"Smartwatch OS Customization",status:"Idea",desc:"Explore the watch firmware and investigate safe ways to customize its software.",links:[]},
-{name:"Multi-device YouTube Sync",status:"Idea",desc:"Explore synchronized YouTube audio playback across multiple devices.",links:[]}
-];
-const grid=document.getElementById("projects"),search=document.getElementById("search"),status=document.getElementById("status");
-document.getElementById("total").textContent=projects.length;
-function render(){
-const q=search.value.toLowerCase(),s=status.value;
-const filtered=projects.filter(p=>(s==="all"||p.status===s)&&(p.name+" "+p.desc).toLowerCase().includes(q));
-grid.innerHTML=filtered.map(p=>'<article class="card"><div class="cardtop"><h2>'+p.name+'</h2><span class="tag '+(p.status==="Live"?"live":p.status==="In progress"?"progress":"")+'">'+p.status+'</span></div><p class="desc">'+p.desc+'</p><div class="links">'+p.links.map(([label,url])=>'<a href="'+url+'" target="_blank" rel="noopener noreferrer">'+label+' ↗</a>').join("")+'</div></article>').join("");
-document.getElementById("empty").style.display=filtered.length?"none":"block";
-}
-search.addEventListener("input",render);status.addEventListener("change",render);render();
-</script>
-</body>
-</html>
+<p class="note">Only completed, accessible apps are listed here. More tools will appear as they are ready.</p>
+</main></body></html>
