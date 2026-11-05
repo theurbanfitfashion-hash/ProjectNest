@@ -5,9 +5,9 @@
 </style></head><body><main>
 <div class="top"><div class="brand"><span>P</span>ProjectNest / Admin</div><a href="./" class="muted">← Public dashboard</a></div>
 <h1>Manage your apps</h1><p class="muted">Add finished tools, update their details, and choose which ones appear on the public dashboard.</p>
-<section class="panel" id="authPanel"><h2 id="authTitle">Administrator sign in</h2><p class="muted" id="authHelp">Use the administrator email configured for this ProjectNest hub.</p>
+<section class="panel" id="authPanel"><h2 id="authTitle">Administrator sign in</h2><p class="muted" id="authHelp">Sign in with an account you created in Supabase Authentication → Users.</p>
 <form id="authForm"><label>Email</label><input id="email" type="email" autocomplete="username" required value="theurbanfitfashion@gmail.com"><label>Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required><button class="btn" id="authSubmit">Sign in</button></form>
-<button class="btn secondary" id="mode">Create administrator account</button><div class="status" id="authStatus" role="status"></div></section>
+<div class="status" id="authStatus" role="status"></div></section>
 <section class="hidden" id="manager">
 <div class="panel"><div class="top"><h2 id="formTitle">Add a new app</h2><button class="btn secondary" id="logout">Sign out</button></div>
 <form id="appForm"><input id="appId" type="hidden"><div class="row"><div><label>App name *</label><input id="name" maxlength="60" required placeholder="StudyTrack"></div><div><label>App website URL *</label><input id="url" type="url" required placeholder="https://your-app.example.com"></div></div>
@@ -19,14 +19,13 @@
 </section>
 </main>
 <script>
-const BASE='https://owsmrnykkrdauueqcbsi.supabase.co',KEY='sb_publishable_OJfuH-lWx_8jR_Zms2MlkQ_XfdH89yR',ADMIN='theurbanfitfashion@gmail.com';
-let token=sessionStorage.getItem('pn_admin_token')||'',signup=false;
+const BASE='https://owsmrnykkrdauueqcbsi.supabase.co',KEY='sb_publishable_OJfuH-lWx_8jR_Zms2MlkQ_XfdH89yR';
+let token=sessionStorage.getItem('pn_admin_token')||'';
 const $=id=>document.getElementById(id);
 async function request(path,options={}){const headers={apikey:KEY,'Content-Type':'application/json',...(options.headers||{})};if(token)headers.Authorization='Bearer '+token;else headers.Authorization='Bearer '+KEY;const r=await fetch(BASE+path,{...options,headers});const body=await r.text();let data;try{data=body?JSON.parse(body):null}catch{data=body}if(!r.ok)throw Error(data?.msg||data?.message||data?.hint||data?.error_description||'Request failed ('+r.status+')');return data}
 function showManager(){ $('authPanel').classList.add('hidden');$('manager').classList.remove('hidden');loadApps()}
 function showAuth(){token='';sessionStorage.removeItem('pn_admin_token');$('manager').classList.add('hidden');$('authPanel').classList.remove('hidden')}
-$('mode').onclick=()=>{signup=!signup;$('authTitle').textContent=signup?'Create administrator account':'Administrator sign in';$('authSubmit').textContent=signup?'Create account':'Sign in';$('mode').textContent=signup?'Back to sign in':'Create administrator account';$('authStatus').textContent='';};
-$('authForm').onsubmit=async e=>{e.preventDefault();$('authStatus').textContent='Please wait…';try{const email=$('email').value.trim().toLowerCase(),password=$('password').value;if(email!==ADMIN)throw Error('This admin page is restricted to the configured administrator email.');let data;if(signup){data=await request('/auth/v1/signup?redirect_to='+encodeURIComponent('https://theurbanfitfashion-hash.github.io/ProjectNest/admin.html'),{method:'POST',body:JSON.stringify({email,password})});if(!data.access_token){$('authStatus').textContent='Account created. Check your email and confirm the address, then return here to sign in.';return}}else data=await request('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})});token=data.access_token;sessionStorage.setItem('pn_admin_token',token);$('authStatus').textContent='';showManager()}catch(err){$('authStatus').textContent=err.message}};
+$('authForm').onsubmit=async e=>{e.preventDefault();$('authStatus').textContent='Please wait…';try{const email=$('email').value.trim().toLowerCase(),password=$('password').value;const data=await request('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password})});token=data.access_token;sessionStorage.setItem('pn_admin_token',token);$('authStatus').textContent='';showManager()}catch(err){$('authStatus').textContent=err.message}};
 $('logout').onclick=showAuth;
 function resetForm(){$('appForm').reset();$('appId').value='';$('icon').value='🌐';$('sort').value='0';$('formTitle').textContent='Add a new app';$('save').textContent='Save app';$('cancelEdit').classList.add('hidden')}
 function escapeText(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
