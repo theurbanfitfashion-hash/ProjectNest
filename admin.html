@@ -54,7 +54,37 @@ $('appForm').onsubmit=async e=>{e.preventDefault();$('formStatus').textContent='
 
 function showLogoPreview(url){const box=$('logoPreview');box.replaceChildren();if(!url){box.textContent='Logo preview';return}const img=document.createElement('img');img.alt='App logo preview';img.src=url;img.onerror=()=>{box.textContent='Preview unavailable'};box.append(img)}
 $('logo').addEventListener('input',()=>showLogoPreview($('logo').value.trim()));
-$('fetchLogo').onclick=async()=>{const status=$('logoStatus');try{const site=new URL($('url').value.trim());if(!['https:','http:'].includes(site.protocol))throw Error('Enter a valid app website URL first.');const candidates=[site.origin+'/apple-touch-icon.png',site.origin+'/favicon.ico','https://www.google.com/s2/favicons?domain='+encodeURIComponent(site.hostname)+'&sz=128'];status.textContent='Looking for the website logo…';let chosen='';for(const candidate of candidates){const test=new Image();const ok=await new Promise(resolve=>{test.onload=()=>resolve(true);test.onerror=()=>resolve(false);test.src=candidate});if(ok){chosen=candidate;break}}if(!chosen)throw Error('No logo found automatically. Paste an image URL instead.');$('logo').value=chosen;showLogoPreview(chosen);status.textContent='Logo found. Save the app to keep it.'}catch(err){status.textContent=err.message}};
+$('fetchLogo').onclick=async()=>{
+  const status=$('logoStatus'),button=$('fetchLogo');
+  let site;
+  try{site=new URL($('url').value.trim());if(!['https:','http:'].includes(site.protocol))throw Error()}
+  catch{status.textContent='Enter a valid app website URL first (including https://).';return}
+  button.disabled=true;status.textContent='Checking the website for its logo…';
+  const host=site.hostname.replace(/^www\\./i,'');
+  const candidates=[
+    site.origin+'/apple-touch-icon.png',
+    site.origin+'/apple-touch-icon-precomposed.png',
+    site.origin+'/favicon.ico',
+    site.origin+'/favicon.png',
+    'https://icons.duckduckgo.com/ip3/'+encodeURIComponent(host)+'.ico',
+    'https://www.google.com/s2/favicons?domain_url='+encodeURIComponent(site.origin)+'&sz=256',
+    'https://icon.horse/icon/'+encodeURIComponent(host)
+  ];
+  const checkImage=url=>new Promise(resolve=>{
+    const image=new Image();let finished=false;
+    const done=ok=>{if(finished)return;finished=true;clearTimeout(timer);resolve(ok&&image.naturalWidth>0)};
+    const timer=setTimeout(()=>done(false),5000);
+    image.onload=()=>done(true);image.onerror=()=>done(false);image.src=url;
+  });
+  try{
+    let chosen='';
+    for(const candidate of candidates){if(await checkImage(candidate)){chosen=candidate;break}}
+    if(!chosen)throw Error('No logo was found automatically. Paste a direct image URL into the Logo image URL field.');
+    $('logo').value=chosen;showLogoPreview(chosen);
+    status.textContent='Logo found. Check the preview, then save the app.';
+  }catch(error){status.textContent=error.message||'Logo retrieval failed. You can paste an image URL manually.'}
+  finally{button.disabled=false}
+};
 $('cancelEdit').onclick=resetForm;
 if(token){request('/auth/v1/user').then(showManager).catch(showAuth)}
 </script></body></html>
