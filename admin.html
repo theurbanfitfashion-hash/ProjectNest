@@ -18,7 +18,7 @@ input:focus,textarea:focus{outline:2px solid rgba(167,196,187,.18);border-color:
 .avatar{background:#303936;color:#a7c4bb;border-radius:10px;font-weight:500}.profile-email{overflow-wrap:anywhere}
 .approw{padding:14px 0;border-bottom:1px solid var(--line)}.appname{font-weight:500}
 .tools button{min-height:34px;padding:0 11px}.small{color:#85858b}
-.logo-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}.logo-preview{width:58px;height:58px;border:1px solid var(--line);border-radius:12px;background:#242426;display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:10px}.logo-preview img{width:100%;height:100%;object-fit:contain}.logo-tools .btn{margin-top:0}@media(max-width:600px){main{padding:18px 16px 48px}.panel{padding:16px}.row{grid-template-columns:1fr}.approw{align-items:flex-start;flex-direction:column}.tools{width:100%}.tools button{flex:1}}</style></head><body><main>
+.logo-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:10px}.logo-preview{width:58px;height:58px;border:1px solid var(--line);border-radius:12px;background:#242426;display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:10px}.logo-preview img{width:100%;height:100%;object-fit:contain}.logo-tools .btn{margin-top:0}@media(max-width:600px){main{padding:18px 16px 48px}.panel{padding:16px}.row{grid-template-columns:1fr}.approw{align-items:flex-start;flex-direction:column}.tools{width:100%}.tools button{flex:1}} .logo-upload{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:10px}.upload-row{display:flex;align-items:center;gap:10px}.upload-row input{min-width:0}.upload-row .btn{white-space:nowrap;margin-top:0}@media(max-width:600px){.upload-row{align-items:stretch;flex-direction:column}.upload-row .btn{width:100%}}</style></head><body><main>
 <div class="top"><div class="brand"><span class="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="11" fill="#242426" stroke="#a7c4bb" stroke-width="1.4"/><path d="M12 12h16v16H12z" fill="none" stroke="#a7c4bb" stroke-width="2.2" rx="3"/><path d="M16 16h8v8h-8z" fill="#a7c4bb"/></svg></span>ProjectNest / Admin</div><a href="./" class="muted">← Public dashboard</a></div>
 <section class="page-head"><p class="small">WORKSPACE SETTINGS</p><h1>Manage your apps</h1><p class="muted">Add finished tools to your library, keep their details current, and choose which apps are visible on the public dashboard.</p></section>
 <section class="panel" id="authPanel"><h2 id="authTitle">Administrator sign in</h2><p class="muted" id="authHelp">Sign in with an account you created in Supabase Authentication → Users.</p>
@@ -29,7 +29,7 @@ input:focus,textarea:focus{outline:2px solid rgba(167,196,187,.18);border-color:
 <div class="panel"><h2 id="formTitle">Add a new app</h2>
 <form id="appForm"><input id="appId" type="hidden"><div class="row"><div><label>App name *</label><input id="name" maxlength="60" required placeholder="StudyTrack"></div><div><label>App website URL *</label><input id="url" type="url" required placeholder="https://your-app.example.com"></div></div>
 <label>Description</label><textarea id="description" maxlength="180" placeholder="What does this tool do?"></textarea>
-<div class="row"><div><label>Fallback mark</label><input id="icon" maxlength="8" value="A"></div><div><label>Logo image URL</label><input id="logo" type="url" placeholder="Fetched logo URL or paste an image URL"></div></div><div class="logo-tools"><button class="btn secondary" type="button" id="fetchLogo">Retrieve logo from app website</button><span class="small" id="logoStatus">Enter the app website URL first.</span><div class="logo-preview" id="logoPreview"><span>Logo preview</span></div></div>
+<div class="row"><div><label>Fallback mark</label><input id="icon" maxlength="8" value="A"></div><div><label>Logo image URL</label><input id="logo" type="url" placeholder="Fetched logo URL or paste an image URL"></div></div><div class="logo-upload"><label for="logoFile">Or upload a logo from your device</label><div class="upload-row"><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/x-icon"><button class="btn secondary" type="button" id="uploadLogo">Upload logo</button></div><div class="small">PNG, JPG, WEBP, SVG or ICO · maximum 5 MB</div></div><div class="logo-tools"><button class="btn secondary" type="button" id="fetchLogo">Retrieve logo from app website</button><span class="small" id="logoStatus">Enter the app website URL first.</span><div class="logo-preview" id="logoPreview"><span>Logo preview</span></div></div>
 <div class="row"><div><label>Sort order (lower appears first)</label><input id="sort" type="number" value="0"></div><label class="check"><input id="published" type="checkbox"> Publish on public dashboard</label></div>
 <button class="btn" id="save">Save app</button><button class="btn secondary hidden" id="cancelEdit" type="button">Cancel edit</button><div class="status" id="formStatus" role="status"></div></form></div>
 <div class="panel"><h2>App library</h2><div class="small">Published apps and drafts</div><div id="list" class="muted">Loading…</div></div>
@@ -54,6 +54,30 @@ $('appForm').onsubmit=async e=>{e.preventDefault();$('formStatus').textContent='
 
 function showLogoPreview(url){const box=$('logoPreview');box.replaceChildren();if(!url){box.textContent='Logo preview';return}const img=document.createElement('img');img.alt='App logo preview';img.src=url;img.onerror=()=>{box.textContent='Preview unavailable'};box.append(img)}
 $('logo').addEventListener('input',()=>showLogoPreview($('logo').value.trim()));
+$('logoFile').onchange=()=>{const file=$('logoFile').files[0];if(!file)return;const allowed=['image/png','image/jpeg','image/webp','image/svg+xml','image/x-icon'];if(!allowed.includes(file.type)){ $('logoStatus').textContent='Choose a PNG, JPG, WEBP, SVG or ICO image.';$('logoFile').value='';return}if(file.size>5*1024*1024){$('logoStatus').textContent='Image must be 5 MB or smaller.';$('logoFile').value='';return}showLogoPreview(URL.createObjectURL(file));$('logoStatus').textContent='Image selected. Tap Upload logo to save it.'};
+$('uploadLogo').onclick=async()=>{
+  const file=$('logoFile').files[0],button=$('uploadLogo'),status=$('logoStatus');
+  if(!file){status.textContent='Choose an image file first.';return}
+  if(!token){status.textContent='Please sign in again before uploading.';return}
+  if(file.size>5*1024*1024){status.textContent='Image must be 5 MB or smaller.';return}
+  button.disabled=true;status.textContent='Uploading logo…';
+  try{
+    const ext=({'image/png':'png','image/jpeg':'jpg','image/webp':'webp','image/svg+xml':'svg','image/x-icon':'ico'})[file.type];
+    if(!ext)throw Error('Unsupported image type.');
+    const id=(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
+    const path='apps/'+id+'.'+ext;
+    const response=await fetch(BASE+'/storage/v1/object/app-logos/'+path.split('/').map(encodeURIComponent).join('/'),{
+      method:'POST',
+      headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':file.type,'x-upsert':'false'},
+      body:file
+    });
+    if(!response.ok){let detail='Upload failed ('+response.status+').';try{const data=await response.json();detail=data.message||data.error||detail}catch{}throw Error(detail)}
+    const publicUrl=BASE+'/storage/v1/object/public/app-logos/'+path.split('/').map(encodeURIComponent).join('/');
+    $('logo').value=publicUrl;showLogoPreview(publicUrl);
+    status.textContent='Logo uploaded. Save the app to attach it to this listing.';
+  }catch(error){status.textContent=error.message||'Could not upload logo.'}
+  finally{button.disabled=false}
+};
 $('fetchLogo').onclick=async()=>{
   const status=$('logoStatus'),button=$('fetchLogo');
   let site;
