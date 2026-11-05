@@ -5,7 +5,7 @@
 :root{color-scheme:dark;--bg:#141415;--line:rgba(237,237,237,.09);--fg:#ededed;--muted:#aaaab0}
 body{background:#141415;color:#ededed;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
 main{max-width:1120px;padding:32px 22px 48px}
-.logo{background:transparent;border:0;color:#a7c4bb;border-radius:9px;font-size:16px;font-weight:500}.brand-mark svg{width:42px;height:42px;display:block}
+.logo{background:#202022;border:1px solid var(--line);color:#a7c4bb;border-radius:9px;font-size:16px;font-weight:500}
 h1{font-size:clamp(34px,5vw,52px);font-weight:500;letter-spacing:-.035em;line-height:1.08;margin:0 0 16px}
 .intro{color:#aaaab0;font-size:16px;line-height:1.65}
 header{padding-bottom:16px;border-bottom:1px solid var(--line)}
@@ -20,70 +20,10 @@ header{padding-bottom:16px;border-bottom:1px solid var(--line)}
 .state{border-radius:12px;border-color:rgba(237,237,237,.16);color:#aaaab0}
 .note{display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;color:#85858b;border-top:1px solid var(--line);padding-top:18px;margin-top:56px;font-size:12px}
 .admin-link{color:#aaaab0;text-decoration:none}.admin-link:hover{color:#ededed}
-@media(max-width:560px){main{padding:20px 16px 40px}.hero{padding:52px 0 38px}.grid{grid-template-columns:1fr;gap:10px}.app{padding:18px;min-height:178px}.note{align-items:flex-start;flex-direction:column;gap:8px;margin-top:40px}}
-/* ProjectNest visual refresh */
-body{background:radial-gradient(ellipse at 50% -20%,#20243b 0%,#101116 48%,#0c0d12 100%);color:#f3f4fa}
-main{max-width:1480px;padding:28px 28px 34px}
-header{border:0;padding:0}
-.brand{gap:16px}.brand strong{font-size:clamp(26px,4vw,42px);font-weight:750;letter-spacing:-.04em}
-.logo{width:66px;height:66px}.brand-mark svg{width:66px;height:66px}
-.hero{max-width:none;padding:28px 0 30px;display:grid;grid-template-columns:1fr;gap:8px}
-.eyebrow{letter-spacing:.18em;font-weight:700;color:#9fa7e9;margin:0}
-h1{font-size:clamp(32px,4.6vw,54px);font-weight:700;letter-spacing:-.04em;margin:0;line-height:1.08}
-.intro{margin:0;color:#b9bfd2;font-size:16px}
-.section{border:1px solid rgba(174,184,220,.18);background:rgba(24,27,39,.76);border-radius:20px 20px 0 0;margin:0;padding:22px 24px 14px;align-items:center}
-.section strong{font-size:25px;font-weight:700}
-.count{font-size:13px}
-.dashboard-tools{display:flex;gap:10px;align-items:center}
-.dashboard-tools input,.dashboard-tools select,.logo-fetch input{background:#11131c;border:1px solid #34394d;color:#f1f2f7;border-radius:12px;padding:12px 14px;font:inherit;min-height:46px}
-.dashboard-tools input{width:min(320px,42vw)}
-.dashboard-tools select{min-width:112px}
-.grid{border:1px solid rgba(174,184,220,.18);border-top:0;border-radius:0 0 20px 20px;background:rgba(17,19,28,.72);padding:18px 20px 24px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
-.app{background:linear-gradient(145deg,rgba(35,38,52,.96),rgba(24,26,37,.96));border:1px solid rgba(174,184,220,.18);border-radius:17px;padding:18px;min-height:225px;align-items:center;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.16)}
-.app:hover{transform:translateY(-2px);background:#282b3a;border-color:#606b9b}
-.apphead{flex-direction:column;gap:10px;width:100%}
-.appicon{width:76px;height:76px;border-radius:19px;background:#f8f8fb;border:0;color:#202333;font-size:27px;box-shadow:0 5px 16px rgba(0,0,0,.18)}
-.appicon img{object-fit:contain;padding:5px}
-.app h3{font-size:18px;font-weight:700}.kind{display:none}
-.desc{font-size:14px;margin:6px 0 16px;color:#c2c7d8;min-height:22px}
-.actions{width:100%}.open{display:block;width:100%;background:#36394b;border:1px solid #484d63;color:#fff;border-radius:11px;font-size:14px;font-weight:600;padding:11px}
-.open:hover{background:#4a4e67}
-.state{background:#1c1f2d}
-.feature-area{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
-.feature-title{display:flex;align-items:center;gap:12px;margin:0 0 4px;font-size:26px}
-.feature-sub{margin:0 0 16px;color:#aeb5cb}
-.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.feature-card{background:rgba(30,33,47,.86);border:1px solid rgba(174,184,220,.16);border-radius:15px;padding:17px;display:flex;gap:13px;align-items:flex-start;min-height:105px}
-.feature-icon{width:44px;height:44px;flex:0 0 44px;border-radius:50%;display:grid;place-items:center;background:#343b75;color:#dfe4ff;font-size:21px}
-.feature-card strong{display:block;font-size:14px;margin:2px 0 5px}.feature-card p{margin:0;color:#aeb5c8;font-size:12px;line-height:1.45}
-.logo-fetch{background:rgba(20,22,34,.9);border:1px solid #7767cb;border-radius:20px;padding:24px;align-self:stretch;box-shadow:inset 0 0 35px rgba(107,83,206,.08)}
-.logo-fetch h2{font-size:24px;margin:0 0 4px}.logo-fetch>p{color:#b9bfd2;margin:0 0 15px}
-.logo-fetch-row{display:flex;gap:8px}.logo-fetch input{flex:1;min-width:0}
-.logo-fetch button{border:0;border-radius:11px;padding:0 16px;background:#6c5bd0;color:white;font-weight:700}
-.logo-result{display:flex;align-items:center;gap:14px;margin-top:16px;padding:12px;background:#222536;border:1px solid #34394d;border-radius:14px;min-height:82px}
-.logo-result img{width:58px;height:58px;object-fit:contain;background:white;border-radius:12px;padding:5px}
-.logo-result strong{display:block}.logo-result small{color:#aeb5c8}
-.note{margin-top:28px;border:1px solid rgba(174,184,220,.18);border-radius:16px;padding:14px 18px;background:rgba(24,27,39,.65);color:#c0c5d5}
-.admin-link{margin:0;color:#c0c5d5;border-color:#44495e}
-@media(max-width:760px){main{padding:18px 14px 28px}.feature-area{grid-template-columns:1fr}.section{align-items:flex-start;flex-direction:column;gap:14px}.dashboard-tools{width:100%}.dashboard-tools input{width:100%;flex:1}.grid{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));padding:12px}.app{padding:14px;min-height:205px}.appicon{width:64px;height:64px}.brand strong{font-size:28px}.logo,.brand-mark svg{width:54px;height:54px}}
-@media(max-width:430px){.feature-grid{grid-template-columns:1fr}.logo-fetch-row{flex-direction:column}.logo-fetch button{min-height:44px}.dashboard-tools{flex-wrap:wrap}.dashboard-tools select{flex:1}}
-/* Public hub: app directory only; no product-feature promotion. */
-.library{border:1px solid rgba(174,184,220,.2);border-radius:21px;background:rgba(20,23,34,.82);overflow:hidden}
-.section{border-radius:20px 20px 0 0}
-.grid{border:1px solid rgba(174,184,220,.18);border-top:0;border-radius:0 0 20px 20px;background:rgba(17,19,28,.72);padding:18px 20px 24px;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
-.app{align-items:center;text-align:center;min-height:245px;padding:20px 15px 15px}
-.apphead{flex-direction:column;gap:10px;width:100%}
-.appicon{width:82px;height:82px;border-radius:21px;background:#f8f8fb;color:#202333;border:0}
-.app h3{font-size:18px}.desc{min-height:22px;margin:6px 0 16px}.actions{width:100%}
-.open{display:flex;justify-content:center;width:100%;background:#363a4e;color:#fff;border:1px solid #484d65;border-radius:11px}
-@media(max-width:1100px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:10px}.app{min-height:215px;padding:15px 10px 11px}.appicon{width:68px;height:68px}}
-@media(max-width:360px){.grid{grid-template-columns:1fr}}
-</style></head><body><main><header><div class="brand"><div class="logo brand-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="pn" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#28c7f5"/><stop offset="1" stop-color="#8a55df"/></linearGradient></defs><path d="M32 3 57 17v30L32 61 7 47V17z" fill="url(#pn)"/><path d="M21 18h17l10 9v19L21 57z" fill="#11131c"/><path d="M28 29h9l5 5v7L28 50z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/></svg></div><strong>ProjectNest</strong></div><section class="hero"><p class="eyebrow">YOUR APP LIBRARY</p><h1>Your apps. One place.</h1><p class="intro">Access your favorite web apps from one simple, organized dashboard.</p></section></header><div class="section"><div><strong>Your Apps</strong><div class="intro">Access your favorite web apps from one place.</div></div><div class="dashboard-tools"><input id="appSearch" type="search" placeholder="Search apps…" aria-label="Search apps"><select id="appSort" aria-label="Sort apps"><option value="default">Default order</option><option value="az">A to Z</option><option value="za">Z to A</option></select><span class="count" id="count">Loading…</span></div></div><section class="grid" id="apps"><div class="state">Loading your apps…</div></section><footer class="note"><span>ProjectNest — A collection of useful web apps in one place.</span><a class="admin-link" href="./admin.html">Admin access</a><!-- Adapted UI design guidance from Unslop by Damir Sokolovsky (https://github.com/heydamir/unslop), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Changes made: adapted styling and layout for ProjectNest. --></footer></main>
+@media(max-width:560px){main{padding:20px 16px 40px}.hero{padding:52px 0 38px}.grid{grid-template-columns:1fr;gap:10px}.app{padding:18px;min-height:178px}.note{align-items:flex-start;flex-direction:column;gap:8px;margin-top:40px}}</style></head><body><main><header><div class="brand"><div class="logo">▦</div><strong>ProjectNest</strong></div><section class="hero"><p class="eyebrow">YOUR APP LIBRARY</p><h1>Your finished apps,<br>ready to open</h1><p class="intro">One place for the tools you have built and use. Choose an app to open it directly.</p></section></header><div class="section"><strong>Available apps</strong><span class="count" id="count">Loading…</span></div><section class="grid" id="apps"><div class="state">Loading your apps…</div></section><footer class="note"><span>A home for useful tools, kept in one place</span><a class="admin-link" href="./admin.html">Admin access</a><!-- Adapted UI design guidance from Unslop by Damir Sokolovsky (https://github.com/heydamir/unslop), licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Changes made: adapted styling and layout for ProjectNest. --></footer></main>
 <script>
 const API='https://owsmrnykkrdauueqcbsi.supabase.co/rest/v1/apps',KEY='sb_publishable_OJfuH-lWx_8jR_Zms2MlkQ_XfdH89yR';
-const grid=document.getElementById('apps'),count=document.getElementById('count');let allApps=[];const search=document.getElementById('appSearch'),sort=document.getElementById('appSort');
+const grid=document.getElementById('apps'),count=document.getElementById('count');
 function makeCard(a){const el=document.createElement('article');el.className='app';const head=document.createElement('div');head.className='apphead';const icon=document.createElement('div');icon.className='appicon';if(a.logo_url){const img=document.createElement('img');img.src=a.logo_url;img.alt='';img.onerror=()=>icon.textContent=(a.name||'A').trim().charAt(0).toUpperCase();icon.append(img)}else icon.textContent=a.icon||'🌐';const info=document.createElement('div'),name=document.createElement('h3'),kind=document.createElement('span');name.textContent=a.name;kind.className='kind';kind.textContent='Web app';info.append(name,kind);head.append(icon,info);const desc=document.createElement('p');desc.className='desc';desc.textContent=a.description||'Open this app from your ProjectNest dashboard.';const actions=document.createElement('div');actions.className='actions';const link=document.createElement('a');link.className='open';link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open app ↗';actions.append(link);el.append(head,desc,actions);return el}
-function renderApps(){let rows=allApps.filter(a=>(a.name+' '+(a.description||'')).toLowerCase().includes(search.value.trim().toLowerCase()));if(sort.value==='az')rows.sort((a,b)=>a.name.localeCompare(b.name));if(sort.value==='za')rows.sort((a,b)=>b.name.localeCompare(a.name));grid.replaceChildren();count.textContent=rows.length+' app'+(rows.length===1?'':'s');if(!rows.length){const e=document.createElement('div');e.className='state';e.textContent=allApps.length?'No apps match your search.':'No apps published yet. Check back soon.';grid.append(e)}else rows.forEach(a=>grid.append(makeCard(a)))}search.addEventListener('input',renderApps);sort.addEventListener('change',renderApps);document.getElementById('previewLogo').onclick=()=>{const result=document.getElementById('logoResult');let u;try{u=new URL(document.getElementById('logoUrl').value.trim());if(!['http:','https:'].includes(u.protocol))throw Error()}catch{result.innerHTML='<div><strong>Enter a valid website URL</strong><small>Include https://</small></div>';return}const candidates=[u.origin+'/apple-touch-icon.png',u.origin+'/favicon.ico','https://www.google.com/s2/favicons?domain='+encodeURIComponent(u.hostname)+'&sz=128'];const img=document.createElement('img');img.alt='Retrieved app logo';img.src=candidates[0];img.onerror=()=>{img.onerror=()=>{img.src=candidates[2];img.onerror=()=>{result.textContent='No icon preview available. Try adding a logo from Admin.'}};img.src=candidates[1]};result.replaceChildren(img);const label=document.createElement('div');label.innerHTML='<strong>'+u.hostname.replace(/[&<>]/g,'')+'</strong><small>Logo preview</small>';result.append(label)};async function load(){try{const r=await fetch(API+'?select=id,name,url,description,icon,logo_url,sort_order&published=eq.true&order=sort_order.asc,name.asc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});if(!r.ok)throw Error('Request failed');allApps=await r.json();renderApps()}catch(e){grid.replaceChildren();const x=document.createElement('div');x.className='state';x.textContent='Could not load apps right now. Please refresh in a moment.';grid.append(x);count.textContent='Unavailable';console.error(e)}}load();
+async function load(){try{const r=await fetch(API+'?select=id,name,url,description,icon,logo_url,sort_order&published=eq.true&order=sort_order.asc,name.asc',{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});if(!r.ok)throw Error('Request failed');const apps=await r.json();grid.replaceChildren();count.textContent=apps.length+' app'+(apps.length===1?'':'s');if(!apps.length){const e=document.createElement('div');e.className='state';e.textContent='No apps published yet. Check back soon.';grid.append(e)}else apps.forEach(a=>grid.append(makeCard(a)))}catch(e){grid.replaceChildren();const x=document.createElement('div');x.className='state';x.textContent='Could not load apps right now. Please refresh in a moment.';grid.append(x);count.textContent='Unavailable';console.error(e)}}load();
 </script></body></html>
